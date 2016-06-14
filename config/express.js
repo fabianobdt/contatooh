@@ -4,9 +4,6 @@ var home = require('../app/routes/home');
 module.exports = function(){
 	var app = express();
 
-	// necessario apenas na versao 3.x
-	//app.use(app.router);
-	
 	// configuracao de ambiente
 	app.set('port', 3000);
 
