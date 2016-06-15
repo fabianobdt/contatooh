@@ -1,5 +1,7 @@
 var express = require('express');
-var rotas = require('../app/routes/home');
+var load = require('express-load');
+//var rotas = require('../app/routes/home');
+//var contatos = require('../app/routes/contato');
 
 //var newrouter = express.Router();
 
@@ -16,7 +18,12 @@ module.exports = function(){
 	app.set('view engine', 'ejs');
 	app.set('views', './app/views');
 	
-	rotas(app);
+	// Alteração para express-load;
+	//rotas(app);
+	load('models', {cwd: 'app'})
+		.then('controllers')
+		.then('routes')
+		.into(app);
 
 	return app;
 };
