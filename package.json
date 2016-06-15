@@ -8,6 +8,7 @@
   },
   "author": "Fabiano Borchardt <fabianobdt@gmail.com>",
   "license": "ISC",
+  "private": true,
   "dependencies": {
     "ejs": "^2.4.2",
     "express": "^4.13.4"
