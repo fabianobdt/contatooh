@@ -1,6 +1,19 @@
 module.exports = function(app){
 
-	var contato = app.controllers.contato;
+	var controller = app.controllers.contato;
 
-	app.get('/contatos', contato.listaContatos);
+	/*
+	app.get('/contatos', controller.listaTodos);
+	app.post('/contatos', controller.salvaContato);
+	app.get('/contatos/:id', controller.obtemContato);
+	app.delete('/contatos/:id', controller.removeContato);
+	*/
+
+	// Utilizando sistema de rotas
+	app.route('/contatos')
+		.get(controller.listaTodos)
+		.post(controller.salvaContato);
+	app.route('/contatos/:id')
+		.get(controller.obtemContato)
+		.delete(controller.removeContato);
 };
