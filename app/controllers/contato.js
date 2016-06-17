@@ -28,9 +28,11 @@ module.exports = function(){
 	controller.listaTodos = function(req, res){
 		res.json(contatos);
 	};
+	
 	controller.salvaContato = function(req, res){
 		//
 	};
+	
 	controller.obtemContato = function(req, res){
 		var	idContato = req.params.id;
 		var contato = contatos.filter(function(contato){
@@ -38,6 +40,7 @@ module.exports = function(){
 		})[0];
 		contato ? res.json(contato) : res.status(404).send('Contato não encontrado');
 	};
+	
 	controller.removeContato = function(req, res){
 		var idContato = req.params.id;
 		console.log('API: removeContato:' + idContato);
