@@ -1,13 +1,15 @@
 angular.module('contatooh').controller('ContatoController',
 function($scope, $routeParams, Contato){ // Substituido $resources pelo factory Contato
 	
-	//console.log($routeParams.contatoId);
-
-	$scope.mensagem = {texto: ''};
-
 	// Substituido $resources pelo factory Contato
 	//var Contato = $resource('/contatos/:id');
+	
+	//console.log($routeParams.contatoId);
 
+	$scope.contats = [];
+	
+	$scope.mensagem = {texto: ''};
+	
 	if($routeParams.contatoId){
 		Contato.get({id: $routeParams.contatoId},
 			function(contato){
@@ -24,6 +26,19 @@ function($scope, $routeParams, Contato){ // Substituido $resources pelo factory 
 		$scope.contato = new Contato();
 	}
 
+	Contato.query(
+		function(contatos){
+			$scope.contatos = contatos;
+		},
+		function(erro){
+			console.log(erro);
+			$scope.mensagem = {
+				texto: 'Não foi possível obter a lista de contatos.'
+			};
+		}
+	);
+
+
 	$scope.salva = function(){
 		$scope.contato.$save()
 			.then(function(){
@@ -36,4 +51,6 @@ function($scope, $routeParams, Contato){ // Substituido $resources pelo factory 
 				console.log(erro);
 			});
 	};
+	
+	
 });

@@ -5,7 +5,7 @@ module.exports = function(app){
 	var controller = {};
 	
 	controller.listaTodos = function(req, res){
-		Contato.find()
+		Contato.find().populate('emergencia')
 		//.select("nome email")
 		.exec().then(
 			function(contatos){
@@ -46,6 +46,9 @@ module.exports = function(app){
 	
 	controller.salvaContato = function(req, res){
 		var _id = req.body._id;
+
+		req.body.emergencia = req.body.emergencia || null;
+
 		if(_id){
 			// Update
 			Contato.findByIdAndUpdate(_id, req.body).exec().then(
