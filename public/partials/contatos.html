@@ -22,7 +22,9 @@
 				{{contato.email}}
 			</td>
 			<td>
-				{{contato.emergencia.nome}}
+				<a ng-href="#/contato/{{contato.emergencia._id}}">
+					{{contato.emergencia.nome}}
+				</a>
 			</td>
 			<td class="text-center">
 				<button ng-click="remove(contato)" class="btn btn-warning">Remover</button>
