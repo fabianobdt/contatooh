@@ -36,4 +36,8 @@ function($scope, $routeParams, Contato){ // Substituido $resources pelo factory 
 				console.log(erro);
 			});
 	};
+
+	Contato.query(function(contatos){
+		$scope.contatos = contatos;
+	});
 });

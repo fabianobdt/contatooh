@@ -1,0 +1,37 @@
+<div class="jumbotron">
+	<h1>Cadastro de Cliente</h1>
+</div>
+<p ng-show="mensagem.texto">{{mensagem.texto}}</p>
+<a ng-href="#/cliente" class="btn btn-primary" >Novo</a>
+<input ng-model="filtro" type="search" placeholder="Filtra nome">
+<p ng-show="clientes.length">Clientes cadastrados: {{clientes.length}}</p>
+<p class="text-info" ng-hide="clientes.length">Não há clientes cadastrados</p>
+<div class="table-responsive">
+	<table class="table table-hover">
+		<tr>
+			<th>Nome</th>
+			<th>E-mail</th>
+			<th>Telefone</th>
+			<th>Data Nascimento</th>
+			<th class="text-center">Ação</th>
+		</tr>
+		<tr ng-repeat="cliente in clientes | filter:filtro">
+			<td>
+				<a ng-href="#/cliente/{{cliente._id}}">{{cliente.nome}}</a>
+			</td>	
+			<td>
+				{{cliente.email}}
+			</td>
+			<td>
+				{{cliente.telefone}}
+			</td>
+			<td>
+				{{cliente.dataNascimento}}
+			</td>
+			
+			<td class="text-center">
+				<button ng-click="remove(contato)" class="btn btn-warning">Remover</button>
+			</td>
+		</tr>
+	</table>
+</div>

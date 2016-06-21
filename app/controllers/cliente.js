@@ -1,15 +1,15 @@
 module.exports = function(app){
 	
-	var Contato = app.models.contato;
+	var Cliente = app.models.cliente;
 
 	var controller = {};
 	
 	controller.listaTodos = function(req, res){
-		Contato.find().populate('emergencia')
+		Cliente.find()
 		//.select("nome email")
 		.exec().then(
-			function(contatos){
-				res.json(contatos);
+			function(clientes){
+				res.json(clientes);
 			},
 			function(erro){
 				console.log(erro);
@@ -18,12 +18,12 @@ module.exports = function(app){
 		);
 	};
 	
-	controller.obtemContato = function(req, res){
+	controller.obtemCliente = function(req, res){
 		var _id = req.params.id;
-		Contato.findById(_id).exec().then(
-			function(contato){
-				if(!contato) throw new Error("Contato não encontrado");
-				res.json(contato);
+		Cliente.findById(_id).exec().then(
+			function(cliente){
+				if(!cliente) throw new Error("Cliente não encontrado");
+				res.json(cliente);
 			},
 			function(erro){
 				console.log(erro);
@@ -32,9 +32,9 @@ module.exports = function(app){
 		);
 	};
 	
-	controller.removeContato = function(req, res){
+	controller.removeCliente = function(req, res){
 		var _id = req.params.id;
-		Contato.remove({"_id":_id}).exec().then(
+		Cliente.remove({"_id":_id}).exec().then(
 			function(){
 				res.end();
 			},
@@ -44,17 +44,13 @@ module.exports = function(app){
 		);
 	};
 	
-	controller.salvaContato = function(req, res){
+	controller.salvaCliente = function(req, res){
 		var _id = req.body._id;
-
-		// testando por undefind
-		req.body.emergencia = req.body.emergencia || null;
-
 		if(_id){
 			// Update
-			Contato.findByIdAndUpdate(_id, req.body).exec().then(
-				function(contato){
-					res.json(contato);
+			Cliente.findByIdAndUpdate(_id, req.body).exec().then(
+				function(cliente){
+					res.json(cliente);
 				},
 				function(erro){
 					console.error(erro);
@@ -63,9 +59,9 @@ module.exports = function(app){
 			);
 		}else{
 			// Create
-			Contato.create(req.body).then(
-				function(contato){
-					res.status(201).json(contato);
+			Cliente.create(req.body).then(
+				function(cliente){
+					res.status(201).json(cliente);
 				},
 				function(erro){
 					console.log(erro);

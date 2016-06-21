@@ -15,11 +15,15 @@ module.exports = function(){
 				unique: true
 			}
 		}, 
-		emergencia: {
-			type: mongoose.Schema.ObjectId,
-			ref: 'Contato'
+		telefone: {
+			type: String,
+			required: true
+		},
+		dataNacimento: {
+			type: String,
+			required: false
 		}
 	});
 
-	return mongoose.model('Contato', schema);
+	return mongoose.model('Cliente', schema);
 };
